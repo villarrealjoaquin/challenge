@@ -41,8 +41,6 @@ export default function Administrador() {
   };
 
   const handleUpdateProduct = async (id: string, data: Product) => {
-    console.log(data);
-
     try {
       const res = await api.updateProduct(id, data);
       if (res.data) {
@@ -67,7 +65,7 @@ export default function Administrador() {
           Bienvenido {user?.name}
         </h1>
       </header>
-      {edit ? (
+      {edit && (
         <>
           <Dialog.Root open={edit} onOpenChange={setEdit}>
             <Dialog.Portal>
@@ -99,8 +97,9 @@ export default function Administrador() {
                   >
                     Descripcion
                   </label>
-                  <textarea
-                    // onChange={handleChange}
+                  <input
+                    onChange={handleChange}
+                    type="text"
                     name="description"
                     id="description"
                     className="text-black shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] bg-white"
@@ -143,8 +142,6 @@ export default function Administrador() {
             </Dialog.Portal>
           </Dialog.Root>
         </>
-      ) : (
-        <></>
       )}
       <main>
         <div className="overflow-x-auto text-black">
