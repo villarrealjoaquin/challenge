@@ -52,30 +52,15 @@ class AuthController {
   }
 
   async verifyToken(req: Request, res: Response) {
-    const { storyToken } = req.cookies;
-    if (!storyToken) return res.status(401).json({ message: "Unauthorized" });
-
-    if (!process.env.JWT_SECRET)
-      return res.status(500).json({ message: "internal Server Error" });
-
-    jwt.verify(
-      storyToken,
-      process.env.JWT_SECRET,
-      async (err: VerifyErrors | null, user: any) => {
-        if (err) return res.status(401).json({ message: "Unauthorized" });
-        const userFound = await UserModel.findById(user.id);
-        if (!userFound)
-          return res.status(401).json({
-            message: "Unauthorized",
-          });
-
-        res.json({
-          id: userFound._id,
-          name: userFound.name,
-          email: userFound.email,
-        });
-      }
-    );
+    try {
+      const { storyToken } = req.cookies;
+      if (!storyToken) return res.status(401).json({ message: "Unauthorized" });
+      const secret = process.env.JWT_SECRET;
+      if (!secret) return res.status(401).json({ message: "Unauthorized" });
+      await authService.validateToken(storyToken, secret, res);
+    } catch (error) {
+      res.status(500).json({ message: "Error verifying token" });
+    }
   }
 }
 
