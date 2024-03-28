@@ -9,7 +9,6 @@ import { toast } from "sonner";
 
 export default function Administrador() {
   const [edit, setEdit] = useState<boolean>(false);
-  const [updateProduct, setUpdateProduct] = useState({} as Product);
   const [selectedProduct, setSelectedProduct] = useState<Product>(
     {} as Product
   );
@@ -17,7 +16,10 @@ export default function Administrador() {
   const user = useAuthStore((state) => state.user);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUpdateProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setSelectedProduct((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleOpenEditModal = (product: Product) => {
@@ -39,6 +41,8 @@ export default function Administrador() {
   };
 
   const handleUpdateProduct = async (id: string, data: Product) => {
+    console.log(data);
+
     try {
       const res = await api.updateProduct(id, data);
       if (res.data) {
@@ -85,8 +89,7 @@ export default function Administrador() {
                     type="text"
                     id="name"
                     name="name"
-                    className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                    placeholder="Correo electrónico"
+                    className="text-black shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] bg-white"
                   />
                 </fieldset>
                 <fieldset className="mb-[15px] flex items-center gap-5">
@@ -100,8 +103,7 @@ export default function Administrador() {
                     // onChange={handleChange}
                     name="description"
                     id="description"
-                    className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                    placeholder="description"
+                    className="text-black shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] bg-white"
                   />
                 </fieldset>
                 <fieldset className="mb-[15px] flex items-center gap-5">
@@ -116,14 +118,13 @@ export default function Administrador() {
                     type="number"
                     name="price"
                     id="price"
-                    className="text-violet11 shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px]"
-                    placeholder="precio"
+                    className="text-black shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] bg-white"
                   />
                 </fieldset>
                 <div className="mt-[25px] flex justify-end">
                   <button
                     onClick={() =>
-                      handleUpdateProduct(selectedProduct?._id, updateProduct)
+                      handleUpdateProduct(selectedProduct?._id, selectedProduct)
                     }
                     className="text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:outline-none"
                   >

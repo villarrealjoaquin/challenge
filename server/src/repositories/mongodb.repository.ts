@@ -17,10 +17,10 @@ export class MongoDBRepository implements ProductRepository {
   }
 
   async create(product: Product): Promise<Product> {
-    // const validatorSchema = validateSchema(productSchema, product);
-    // if (!validatorSchema) {
-    //   throw new Error("Invalid product data");
-    // }
+    const validatorSchema = validateSchema(productSchema, product);
+    if (!validatorSchema) {
+      throw new Error("Invalid product data");
+    }
     
     const existingProduct = await ProductModel.findOne({
       name: product.name,
@@ -31,18 +31,11 @@ export class MongoDBRepository implements ProductRepository {
     }
     
     const hasBrand = await BrandModel.findById(product.brand);
-    console.log(hasBrand);
     if (!hasBrand) throw new Error("Brand not found");
-    
-    const newProduct = {
-      ...product,
-    };
 
-    const createProduct = new ProductModel(newProduct);
-    createProduct.brand = hasBrand as any;
-    const result = await createProduct.save();
-    console.log(result);
-    
+    const createProduct = new ProductModel(product);
+    createProduct.brand = hasBrand;
+    const result = await createProduct.save();    
     return result.toObject() as Product;
   }
 

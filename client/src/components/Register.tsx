@@ -29,6 +29,8 @@ export default function Register({ children }: { children: React.ReactNode }) {
         navigate("/");
       }
     } catch (error) {
+      console.log(error);
+      
       setData(initialState);
       setUser(null);
     }
