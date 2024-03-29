@@ -74,7 +74,7 @@ class AuthController {
 
   async verifyToken(req: Request, res: Response) {
     try {
-      const { storyToken } = req.cookies;
+      const storyToken = req.headers.authorization?.split(' ')[1]
       if (!storyToken) {
         return res
           .status(HttpStatus.UNAUTHORIZED)

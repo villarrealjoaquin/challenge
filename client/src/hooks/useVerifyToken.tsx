@@ -10,10 +10,10 @@ export default function useVerifyToken() {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const cookie = localStorage.getItem("storyToken");
-        if (cookie) {
+        const token = localStorage.getItem("storyToken");
+        if (token) {
           setIsLoading(true);
-          const { data } = await api.verifyTokenRequest();
+          const { data } = await api.verifyTokenRequest(token);
           setIsAuthenticated(true);
           setUser(data);
         }

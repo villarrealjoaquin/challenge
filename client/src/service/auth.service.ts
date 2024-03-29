@@ -5,7 +5,11 @@ const api = {
   signIn: (user: Partial<User>) => instance.post("/auth/login", user),
   signUp: (user: Partial<User>) => instance.post("/auth/signup", user),
   logout: () => instance.get("/auth/logout"),
-  verifyTokenRequest: () => instance.get('auth/verify'),
+  verifyTokenRequest: (token: string) => instance.get('auth/verify', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  }),
 };
 
 export default api;

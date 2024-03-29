@@ -1,5 +1,4 @@
 import { toast } from "sonner";
-import instance from "../../../service/axios.config";
 import { useAuthStore } from "../../../store/auth.store";
 
 export default function Logout() {
@@ -8,12 +7,10 @@ export default function Logout() {
 
   const handleLogout = async () => {
     try {
-      const res = await instance.get("/auth/logout");
-      if (res.status === 200) {
-        toast.success("Sesión cerrada con exito");
-        setUser(null);
-        setIsAuthenticated(false);
-      }
+      localStorage.removeItem("storyToken");
+      toast.success("Sesión cerrada con exito");
+      setUser(null);
+      setIsAuthenticated(false);
     } catch (error) {
       toast.error("Error al cerrar sesión");
     }
