@@ -49,7 +49,8 @@ class AuthController {
           .json({ message: "Invalid credentials" });
       }
       const token = authService.generateToken(user);
-      res.cookie("storyToken", token);
+      const cookieParams = { httpOnly: true, secure: true };
+      res.cookie("storyToken", token, cookieParams);
       return res
         .status(HttpStatus.OK)
         .json({ message: "User logged in successfully", user, token });
@@ -74,16 +75,12 @@ class AuthController {
   async verifyToken(req: Request, res: Response) {
     try {
       const { storyToken } = req.cookies;
-      if (!storyToken)
+      if (!storyToken) {
         return res
           .status(HttpStatus.UNAUTHORIZED)
           .json({ message: "Unauthorized" });
-      const secret = process.env.JWT_SECRET;
-      if (!secret)
-        return res
-          .status(HttpStatus.UNAUTHORIZED)
-          .json({ message: "Unauthorized" });
-      await authService.validateToken(storyToken, secret, res);
+      }
+      await authService.validateToken(storyToken, process.env.JWT_SECRET, res);
     } catch (error) {
       res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)

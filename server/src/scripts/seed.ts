@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
 import { exampleProducts } from "../mock";
 
-const { MONGODB_URL } = process.env;
-if (!MONGODB_URL) throw new Error("MONGODB_URL must be defined");
-
 const insertProducts = async () => {
   try {
-    const { connection } = await mongoose.connect(MONGODB_URL);
+    const { connection } = await mongoose.connect(process.env.MONGODB_URL);
 
     if (connection.readyState === 1) {
       for await (const product of exampleProducts) {
