@@ -3,6 +3,7 @@ import UserModel from "../models/user.model";
 import type { User } from "../types/product.type";
 import bcrypt from "bcryptjs";
 import jwt, { VerifyErrors } from "jsonwebtoken";
+import { HttpStatus } from "../utils/http-status-enum";
 
 class authService {
   async createUser(user: User) {
@@ -26,11 +27,11 @@ class authService {
       if (err) return res.status(401).json({ message: "Unauthorized" });
       const userFound = await UserModel.findById(user.id);
       if (!userFound)
-        return res.status(401).json({
+        return res.status(HttpStatus.UNAUTHORIZED).json({
           message: "Unauthorized",
         });
 
-      res.json({
+      return res.json({
         id: userFound._id,
         name: userFound.name,
         email: userFound.email,
@@ -46,7 +47,7 @@ class authService {
     return jwt.sign(
       { id: user.id, email: user.email, name: user.name },
       process.env.JWT_SECRET as string,
-      { expiresIn: "1d" }
+      { expiresIn: process.env.JWT_EXPIRES_IN }
     );
   }
 

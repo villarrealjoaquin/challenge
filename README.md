@@ -1,4 +1,4 @@
-# Coding Challenge
+# Coding Challenge - Fullstack Developer
 
 Este repositorio contiene una solución para el coding challenge, el cual consiste en la construcción de una aplicación dividida en una parte de frontend y otra de backend. A continuación se detallan las funcionalidades de cada parte de la aplicación, las librerías utilizadas, y cómo levantar el proyecto localmente.
 
@@ -14,14 +14,6 @@ El backend de la aplicación es una API REST construida con Node.js que permite 
 - Actualizar un producto existente.
 - Eliminar un producto.
 
-### Tecnologías Backend Utilizadas:
-
-- Node.js
-- Express.js
-- Cors
-- Dotenv
-- Mongoose (para interactuar con la base de datos MongoDB)
-- Otros paquetes de middleware de Node.js
 
 ### Endpoints Disponibles:
 
@@ -35,6 +27,15 @@ El backend de la aplicación es una API REST construida con Node.js que permite 
 - POST `/api/auth/login`: Endpoint para que un usuario inicie sesión.
 - GET `/api/auth/verify`: Endpoint para verificar un token de autenticación.
 
+### Tecnologías Utilizadas:
+
+- Node.js
+- Express.js
+- Cors
+- Dotenv
+- Mongoose (para interactuar con la base de datos MongoDB)
+- Otros paquetes de middleware de Node.js
+
 ### Variables de Entorno:
 
 El archivo `.env.example` contiene las variables de entorno necesarias para configurar la aplicación. Se deben definir estas variables en un archivo `.env` en el directorio raíz del proyecto.
@@ -47,6 +48,7 @@ El frontend de la aplicación está construido con React y se encarga de mostrar
 
 - Listado de productos.
 - Vista de detalle de productos.
+- Administrar productos desde su propia vista.
 - scroll infinito.
 
 ### Tecnologías Utilizadas:
@@ -71,7 +73,7 @@ Siga estos pasos para levantar el proyecto localmente:
 
 1. Clone este repositorio en su máquina local:
 ```sh
-git clone https://github.com/tu-usuario/tu-repositorio.git
+git clone https://github.com/villarrealjoaquin/challenge.git
 ```
 2. Navegue al directorio del proyecto:
 ```sh
@@ -86,7 +88,7 @@ npm install
 cd client
 npm install
 ```
-4. Cree un archivo .env en el directorio raíz del proyecto y configure las variables de entorno necesarias. Las variables de entorno se encuentran en .env.example
+4. Cree un archivo .env en el directorio raíz del proyecto y configure las variables de entorno necesarias. Las variables de entorno se encuentran en .env.example.
 
 5. Levante el servidor backend y el cliente frontend:
 ```sh
