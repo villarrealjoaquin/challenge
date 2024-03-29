@@ -28,7 +28,7 @@ export default function Register({ children }: { children: React.ReactNode }) {
         const token = res.data.token;
         window.localStorage.setItem("storyToken", token);
         setUser(res.data.user);
-        // navigate("/");
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
