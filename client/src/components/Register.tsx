@@ -23,11 +23,12 @@ export default function Register({ children }: { children: React.ReactNode }) {
     try {
       const res = await api.signUp(data);
       if (res.data) {
+        const token = res.data.token;
+        localStorage.setItem("storyToken", token);
         setUser(res.data.user);
         setData(initialState);
         setIsAuthenticated(true);
         toast.success("Se registro correctamente");
-        window.location.reload();
       }
     } catch (error) {
       setData(initialState);

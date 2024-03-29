@@ -22,6 +22,8 @@ export default function Login({ children }: { children: React.ReactNode }) {
     try {
       const res = await api.signIn(data);
       if (res.data) {
+        const token = res.data.token;
+        localStorage.setItem("storyToken", token);
         setUser(res.data.user);
         toast.success("Sesion iniciada");
         setIsAuthenticated(true);
