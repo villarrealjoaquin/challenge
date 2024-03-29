@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../service/auth.service";
 import { useAuthStore } from "../store/auth.store";
 
@@ -10,7 +9,6 @@ const initialState = {
 
 export default function Login({ children }: { children: React.ReactNode }) {
   const [data, setData] = useState(initialState);
-  const navigate = useNavigate();
   const { setUser } = useAuthStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,9 +23,10 @@ export default function Login({ children }: { children: React.ReactNode }) {
         const token = res.data.token;
         window.localStorage.setItem("storyToken", token);
         setUser(res.data.user);
-        navigate("/");
       }
     } catch (error) {
+      console.log(error);
+      
       setData(initialState);
       setUser(null);
     }
