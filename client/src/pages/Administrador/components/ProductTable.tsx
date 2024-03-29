@@ -19,16 +19,16 @@ function ProductTable({
       <table className="min-w-full border border-gray-200">
         <thead className="bg-purple-100">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-semibold text-purple-600 uppercase tracking-wider">
               Nombre
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-semibold text-purple-600 uppercase tracking-wider">
               Descripción
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-semibold text-purple-600 uppercase tracking-wider">
               Precio
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-semibold text-purple-600 uppercase tracking-wider">
               Acciones
             </th>
           </tr>
@@ -44,21 +44,17 @@ function ProductTable({
             products.map((product) => (
               <tr key={product.name}>
                 <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {product.description}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  ${product.price}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap">{product.description}</td>
+                <td className="px-6 py-4 whitespace-nowrap">${product.price}</td>
+                <td className="px-6 py-4 whitespace-nowrap space-x-2">
                   <button
-                    className="mr-2 text-xs text-blue-600 font-bold"
+                    className="text-xs text-blue-600 font-bold hover:underline focus:outline-none"
                     onClick={() => onOpenEditModal(product)}
                   >
                     Editar
                   </button>
                   <button
-                    className="text-xs text-red-600 font-bold"
+                    className="text-xs text-red-600 font-bold hover:underline focus:outline-none"
                     onClick={() => onDeleteProduct(product._id)}
                   >
                     Eliminar

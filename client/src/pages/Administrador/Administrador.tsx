@@ -32,7 +32,7 @@ export default function Administrador() {
       const res = await api.deleteProduct(id);
       if (res.data) {
         updateProducts(products.filter((product) => product._id !== id));
-        toast.success("Se actualizo correctamente");
+        toast.success("Se elimino correctamente");
       }
     } catch (error) {
       toast.error("Ocurrio un error");

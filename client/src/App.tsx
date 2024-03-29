@@ -1,8 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route } from "react-router-dom";
-import { Footer } from "./components";
-import { AuthGuard, RouterWithNotFound } from "./utils";
 import { useVerifyToken } from "./hooks";
+import { AuthGuard, RouterWithNotFound } from "./utils";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Administrador = lazy(() => import("./pages/Administrador/Administrador"));
@@ -18,7 +17,6 @@ function App() {
             <Route path="/administrador" element={<Administrador />} />
           </Route>
         </RouterWithNotFound>
-        <Footer />
       </Suspense>
     </>
   );

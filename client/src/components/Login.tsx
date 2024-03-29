@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import api from "../service/auth.service";
 import { useAuthStore } from "../store/auth.store";
 
@@ -10,6 +11,7 @@ const initialState = {
 export default function Login({ children }: { children: React.ReactNode }) {
   const [data, setData] = useState(initialState);
   const { setUser } = useAuthStore();
+  const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -20,15 +22,14 @@ export default function Login({ children }: { children: React.ReactNode }) {
     try {
       const res = await api.signIn(data);
       if (res.data) {
-        const token = res.data.token;
-        window.localStorage.setItem("storyToken", token);
         setUser(res.data.user);
+        toast.success("Sesion iniciada");
+        setIsAuthenticated(true);
       }
     } catch (error) {
-      console.log(error);
-      
       setData(initialState);
       setUser(null);
+      toast.error("Ocurio un error");
     }
   };
 

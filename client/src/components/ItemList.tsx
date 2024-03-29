@@ -4,6 +4,7 @@ interface Props<T> {
   extractId: (list: T) => string;
   className?: string;
   classNameItem?: string;
+  numProductsToShow?: number;
 }
 
 export default function ItemList<T>({
@@ -11,11 +12,12 @@ export default function ItemList<T>({
   extractId,
   list,
   className,
-  classNameItem
+  classNameItem,
+  numProductsToShow = 6
 }: Props<T>) {
   return (
     <ul className={className}>
-      {list.map((item, i) => (
+      {list.slice(0, numProductsToShow).map((item, i) => (
         <li key={`${i} - ${extractId(item)}`} className={classNameItem}>
           {renderList(item)}
         </li>

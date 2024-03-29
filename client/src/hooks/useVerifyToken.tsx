@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import api from "../service/auth.service";
 import { useAuthStore } from "../store/auth.store";
+import Cookies from "js-cookie";
 
 export default function useVerifyToken() {
   const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
@@ -10,8 +11,8 @@ export default function useVerifyToken() {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const user = localStorage.getItem("storyToken");
-        if (user) {
+        const cookie = Cookies.get("storyToken");
+        if (cookie) {
           setIsLoading(true);
           const { data } = await api.verifyTokenRequest();
           setIsAuthenticated(true);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../service/auth.service";
 import { useAuthStore } from "../store/auth.store";
+import { toast } from "sonner";
 
 const initialState = {
   name: "",
@@ -10,7 +11,8 @@ const initialState = {
 
 export default function Register({ children }: { children: React.ReactNode }) {
   const [data, setData] = useState(initialState);
-  const { setUser } = useAuthStore();
+  const setUser = useAuthStore((state) => state.setUser);
+  const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -21,9 +23,11 @@ export default function Register({ children }: { children: React.ReactNode }) {
     try {
       const res = await api.signUp(data);
       if (res.data) {
-        const token = res.data.token;
-        window.localStorage.setItem("storyToken", token);
         setUser(res.data.user);
+        setData(initialState);
+        setIsAuthenticated(true);
+        toast.success("Se registro correctamente");
+        window.location.reload();
       }
     } catch (error) {
       setData(initialState);

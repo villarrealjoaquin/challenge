@@ -60,6 +60,17 @@ class AuthController {
     }
   }
 
+  async logout(_req: Request, res: Response) {
+    try {
+      res.clearCookie("storyToken");
+      res.json({ message: "Logout success" });
+    } catch (error) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ message: "Error logging out" });
+    }
+  }
+
   async verifyToken(req: Request, res: Response) {
     try {
       const { storyToken } = req.cookies;

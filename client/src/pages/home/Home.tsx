@@ -3,7 +3,13 @@ import { ItemList, SkeletonProducts } from "../../components";
 import { useGetItems, useInfiniteScroll } from "../../hooks";
 import { useAuthStore } from "../../store/auth.store";
 import type { Product } from "../../types/product";
-import { AdministradorLink, Auth, ProductModal, Scroll } from "./components";
+import {
+  AdministradorLink,
+  Auth,
+  Logout,
+  ProductModal,
+  Scroll,
+} from "./components";
 
 export default function Home() {
   const [open, setOpen] = useState<boolean>(false);
@@ -30,7 +36,14 @@ export default function Home() {
         <h2 className="text-center text-lg font-bold">Nuestros Productos</h2>
       </header>
 
-      {user ? <AdministradorLink /> : <Auth />}
+      {user ? (
+        <section className="flex justify-center items-center gap-3 m-5">
+          <AdministradorLink />
+          <Logout />
+        </section>
+      ) : (
+        <Auth />
+      )}
 
       {selectedProduct && (
         <ProductModal
@@ -40,17 +53,18 @@ export default function Home() {
         />
       )}
 
-      <main className="w-1/2 m-auto">
+      <main className="w-full lg:w-3/4 m-auto">
         <div>
           {!isLoading && (
             <SkeletonProducts numProductsToShow={numProductsToShow} />
           )}
 
           <ItemList
-            className="flex flex-wrap justify-center items-center gap-y-8 gap-x-2"
-            classNameItem="flex flex-col w-1/3 h-[400px] items-center gap-4 border rounded-md p-4 shadow-md bg-white text-black"
             list={products}
             extractId={(product) => product._id}
+            className="W-full flex flex-wrap justify-center items-center gap-y-8 gap-x-2"
+            classNameItem="flex flex-col w-1/3 h-[400px] items-center gap-4 border rounded-md p-4 shadow-md bg-white text-black"
+            numProductsToShow={numProductsToShow}
             renderList={(product) => (
               <>
                 <img
