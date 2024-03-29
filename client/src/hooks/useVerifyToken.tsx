@@ -12,19 +12,18 @@ export default function useVerifyToken() {
       try {
         const user = localStorage.getItem("storyToken");
         if (user) {
+          setIsLoading(true);
           const { data } = await api.verifyTokenRequest();
           setIsAuthenticated(true);
           setUser(data);
-          setIsLoading(false);
         }
       } catch (error) {
         setIsAuthenticated(false);
-        setIsLoading(false);
         setUser(null);
+      } finally {
+        setIsLoading(false);
       }
     };
     verifyToken();
-  }, [setIsAuthenticated, setUser]);
-
-  return null;
+  }, [setIsAuthenticated, setUser, setIsLoading]);
 }

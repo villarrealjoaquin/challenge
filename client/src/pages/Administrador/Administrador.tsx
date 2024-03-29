@@ -1,11 +1,11 @@
-import Skeleton from "react-loading-skeleton";
+import * as Dialog from "@radix-ui/react-dialog";
+import { useState } from "react";
+import { toast } from "sonner";
 import { useGetItems } from "../../hooks";
 import api from "../../service/products.service";
 import { useAuthStore } from "../../store/auth.store";
 import type { Product } from "../../types/product";
-import { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
-import { toast } from "sonner";
+import { ProductTable } from "./components";
 
 export default function Administrador() {
   const [edit, setEdit] = useState<boolean>(false);
@@ -36,7 +36,6 @@ export default function Administrador() {
       }
     } catch (error) {
       toast.error("Ocurrio un error");
-      console.log(error);
     }
   };
 
@@ -57,7 +56,7 @@ export default function Administrador() {
       setSelectedProduct({} as Product);
     }
   };
-
+  
   return (
     <>
       <header>
@@ -65,8 +64,8 @@ export default function Administrador() {
           Bienvenido {user?.name}
         </h1>
       </header>
-      {edit && (
-        <>
+      <main>
+        {edit && (
           <Dialog.Root open={edit} onOpenChange={setEdit}>
             <Dialog.Portal>
               <Dialog.Overlay className="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0" />
@@ -141,66 +140,15 @@ export default function Administrador() {
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>
-        </>
-      )}
-      <main>
-        <div className="overflow-x-auto text-black">
-          <table className="min-w-full border border-gray-200">
-            <thead className="bg-purple-100">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
-                  Nombre
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
-                  Descripción
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
-                  Precio
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-purple-600 uppercase tracking-wider">
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {!isLoading ? (
-                <tr>
-                  <td className="px-6 py-4" colSpan={4}>
-                    <Skeleton count={10} height={100} width={1200} />
-                  </td>
-                </tr>
-              ) : (
-                products.map((product) => (
-                  <tr key={product.name}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {product.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {product.description}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      ${product.price}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <button
-                        className="mr-2 text-xs text-blue-600 font-bold"
-                        onClick={() => handleOpenEditModal(product)}
-                      >
-                        Editar
-                      </button>
-                      <button
-                        className="text-xs text-red-600 font-bold"
-                        onClick={() => handleDeleteProduct(product._id)}
-                      >
-                        Eliminar
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+        )}
+
+        <ProductTable
+          products={products}
+          isLoading={isLoading}
+          onOpenEditModal={handleOpenEditModal}
+          onDeleteProduct={handleDeleteProduct}
+        />
+
         <div className="m-4 flex justify-center">
           <button className="px-4 py-2 bg-purple-600 text-white rounded-md">
             Agregar Producto

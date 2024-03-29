@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import type { Product } from "../types/product";
+import type { Product } from "../../../types/product";
 
 export default function ProductModal({
   isOpen,
