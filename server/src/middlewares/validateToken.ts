@@ -12,25 +12,34 @@ export const validateToken = (
   res: Response,
   next: NextFunction
 ) => {
-  const storyToken = req.headers.authorization?.split(" ")[1];
+  try {
+    console.log(req.headers);
 
-  if (!storyToken) {
-    return res.status(HttpStatus.UNAUTHORIZED).json({
-      error: "Unauthorized",
-    });
-  }
+    const storyToken = req.headers.authorization?.split(" ")[1];
+    console.log(storyToken);
 
-  jwt.verify(
-    storyToken,
-    process.env.JWT_SECRET,
-    (error: VerifyErrors | null, user: any) => {
-      if (error) {
-        return res.status(HttpStatus.UNAUTHORIZED).json({
-          error: "Unauthorized",
-        });
-      }
-      req.user = user as User;
-      next();
+    if (!storyToken) {
+      return res.status(HttpStatus.UNAUTHORIZED).json({
+        error: "Unauthorized",
+      });
     }
-  );
+
+    jwt.verify(
+      storyToken,
+      process.env.JWT_SECRET,
+      (error: VerifyErrors | null, user: any) => {
+        if (error) {
+          return res.status(HttpStatus.UNAUTHORIZED).json({
+            error: "Unauthorized",
+          });
+        }
+        req.user = user as User;
+        next();
+      }
+    );
+  } catch (error) {
+    res
+      .status(HttpStatus.INTERNAL_SERVER_ERROR)
+      .json({ data: error, error: true });
+  }
 };

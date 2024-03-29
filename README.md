@@ -118,6 +118,14 @@ npm run dev
 cd client
 npm run dev
 ```
+### Crendenciales
+
+testchallenge1@gmail.com
+123456
+
+## Disclaimer
+
+Dado que el backend está desplegado en Render, es importante tener en cuenta la advertencia que indica: "Su instancia gratuita dejará de funcionar debido a la inactividad, lo que puede retrasar las solicitudes 50 segundos o más". Si experimentas retrasos en la carga de los productos, es posible que solo necesites esperar mientras la instancia se reactiva.
 
 Con estos pasos, la aplicación debería estar corriendo localmente en su máquina.
 

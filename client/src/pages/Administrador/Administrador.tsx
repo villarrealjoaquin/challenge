@@ -29,7 +29,8 @@ export default function Administrador() {
 
   const handleDeleteProduct = async (id: string) => {
     try {
-      const res = await api.deleteProduct(id);
+      const token = localStorage.getItem("storyToken") as string;
+      const res = await api.deleteProduct(id, token);
       if (res.data) {
         updateProducts(products.filter((product) => product._id !== id));
         toast.success("Se elimino correctamente");
@@ -41,7 +42,8 @@ export default function Administrador() {
 
   const handleUpdateProduct = async (id: string, data: Product) => {
     try {
-      const res = await api.updateProduct(id, data);
+      const token = localStorage.getItem("storyToken") as string;
+      const res = await api.updateProduct(id, data, token);
       if (res.data) {
         updateProducts(
           products.map((product) => (product._id === id ? data : product))
