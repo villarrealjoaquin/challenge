@@ -56,13 +56,16 @@ export default function Administrador() {
       setSelectedProduct({} as Product);
     }
   };
-  
+
   return (
     <>
-      <header>
+      <header className="m-5">
         <h1 className="text-2xl text-center m-5 font-semibold mb-4">
-          Bienvenido {user?.name}
+          Bienvenido {user?.name} - Administrador
         </h1>
+        <p className="text-lg text-center">
+          En esta sección podrás administrar los productos de la plataforma.
+        </p>
       </header>
       <main>
         {edit && (
@@ -86,6 +89,7 @@ export default function Administrador() {
                     type="text"
                     id="name"
                     name="name"
+                    value={selectedProduct?.name}
                     className="text-black shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] bg-white"
                   />
                 </fieldset>
@@ -100,6 +104,7 @@ export default function Administrador() {
                     onChange={handleChange}
                     type="text"
                     name="description"
+                    value={selectedProduct?.description}
                     id="description"
                     className="text-black shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] bg-white"
                   />
@@ -114,6 +119,7 @@ export default function Administrador() {
                   <input
                     onChange={handleChange}
                     type="number"
+                    value={selectedProduct?.price}
                     name="price"
                     id="price"
                     className="text-black shadow-violet7 focus:shadow-violet8 inline-flex h-[35px] w-full flex-1 items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none shadow-[0_0_0_1px] outline-none focus:shadow-[0_0_0_2px] bg-white"
@@ -150,7 +156,7 @@ export default function Administrador() {
         />
 
         <div className="m-4 flex justify-center">
-          <button className="px-4 py-2 bg-purple-600 text-white rounded-md">
+          <button className="text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
             Agregar Producto
           </button>
         </div>
