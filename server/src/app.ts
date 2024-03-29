@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://challenge-eight-swart.vercel.app",
+    origin: "https://challenge-joaquinmv1.vercel.app",
     credentials: true,
   })
 );

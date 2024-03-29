@@ -1,7 +1,5 @@
 import type { Request, Response } from "express";
 import authService from "../services/auth.service";
-import jwt, { VerifyErrors } from "jsonwebtoken";
-import UserModel from "../models/user.model";
 import { HttpStatus } from "../utils/http-status-enum";
 
 class AuthController {
