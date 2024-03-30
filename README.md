@@ -118,6 +118,7 @@ npm run dev
 cd client
 npm run dev
 ```
+
 ### Crendenciales
 
 testchallenge1@gmail.com
@@ -128,5 +129,15 @@ testchallenge1@gmail.com
 Dado que el backend está desplegado en Render, es importante tener en cuenta la advertencia que indica: "Su instancia gratuita dejará de funcionar debido a la inactividad, lo que puede retrasar las solicitudes 50 segundos o más". Si experimentas retrasos en la carga de los productos, es posible que solo necesites esperar mientras la instancia se reactiva.
 
 Con estos pasos, la aplicación debería estar corriendo localmente en su máquina.
+
+## Preview
+
+[![challenge-1.png](https://i.postimg.cc/ydmF2pp4/challenge-1.png)](https://postimg.cc/1nznqBZJ)
+
+[![challenge-2.png](https://i.postimg.cc/vBtV0gDG/challenge-2.png)](https://postimg.cc/jwC25jz1)
+
+[![challenge-3.png](https://i.postimg.cc/Df5GsXtg/challenge-3.png)](https://postimg.cc/V5r5Pdsr)
+
+[![imagen-2024-03-29-210656835.png](https://i.postimg.cc/13F4WnYb/imagen-2024-03-29-210656835.png)](https://postimg.cc/TKRR1wxc)
 
 [Deploy](https://challenge-joaquinmv1.vercel.app)

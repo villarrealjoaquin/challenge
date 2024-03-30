@@ -10,6 +10,7 @@ declare global {
       MONGODB_URL: string;
       JWT_SECRET: string;
       JWT_EXPIRES_IN: string;
+      FRONTEND_URL_BASE: string;
     }
   }
 }

@@ -13,10 +13,7 @@ export const validateToken = (
   next: NextFunction
 ) => {
   try {
-    console.log(req.headers);
-
     const storyToken = req.headers.authorization?.split(" ")[1];
-    console.log(storyToken);
 
     if (!storyToken) {
       return res.status(HttpStatus.UNAUTHORIZED).json({
