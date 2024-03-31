@@ -29,11 +29,16 @@ export default function Home() {
 
   return (
     <>
-      <header className="m-10 flex flex-col gap-2">
+      <header className="mt-10 mb-7 flex flex-col gap-2">
         <h1 className="text-center text-xl font-bold">
           Challenge - Story dots
         </h1>
         <h2 className="text-center text-lg font-bold">Nuestros Productos</h2>
+        <p className="text-center text-sm mt-3 w-1/2 m-auto">
+          **Nota:** Si experimentas retrasos en la carga de los productos debido
+          a las limitaciones de la instancia gratuita, espera unos momentos
+          mientras se reactiva.
+        </p>
       </header>
 
       {user ? (

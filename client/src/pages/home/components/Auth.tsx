@@ -14,7 +14,7 @@ export default function Auth() {
   return (
     <>
       <Dialog.Root open={open} onOpenChange={setOpen}>
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center mb-7">
           <Dialog.Trigger asChild className="flex justify-center">
             <button className="text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
               Iniciar Sesión
